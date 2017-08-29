@@ -9,14 +9,15 @@ You'll most likely use this Varnish image in a compose or stack file in-front of
 
 ```
 version: "2"
-  services:
-    kirby:
-      image: mecrawlings/getkirby-starterkit
-    varnish:
-      image: mecrawlings/varnish
-      ports:
-        - 8080:80
-      environment:
-        VARNISH_BACKEND_ADDRESS: kirby
+services:
+  kirby:
+    image: mecrawlings/kirby-starterkit
+  varnish:
+    image: mecrawlings/varnish
+    ports:
+      - "80:8080"
+    environment:
+      VARNISH_BACKEND_ADDRESS: kirby
+
 ```
 This will run a Kirby container with a Varnish cache in-front. The varnish container responds on port 80, internally Kirby is running on port 80 and Varnish on 8080 then Docker maps the Varnish port back to 80 externally.
